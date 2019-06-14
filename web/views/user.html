@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  {{ template "flash" . }}
+
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <td>Email</td>
+    </thead>
+    <tbody>
+      {{ range .Users }}
+      <tr>
+        <td>{{ .Name.String }}</td>
+        <td>{{ .Email.String }}</td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+
+  <form action="/users" method="POST">
+    <button type="submit" class="btn btn-primary">Flash View</button>
+  </form>
+
+</body>
+
+</html>

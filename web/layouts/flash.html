@@ -1,0 +1,11 @@
+{{ define "flash" }}
+
+{{ if .Flash }}
+<div class="alert alert-{{ .Flash.Type }} alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{ .Flash.Message }}</strong>
+</div>
+
+{{ end }}
+
+{{ end }}

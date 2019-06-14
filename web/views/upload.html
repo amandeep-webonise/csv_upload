@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <form  method="POST" name="uploadform" id="uploadform" enctype="multipart/form-data">
+    <div class="container">
+      <div class="row">
+          <div class="col-sm-12">&nbsp;</div>
+      </div>         
+      <div class="row">
+        <div class="col-sm-4">&nbsp;</div>
+        <div class="col-sm-4" id="message">&nbsp;</div>
+        <div class="col-sm-4">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">&nbsp;</div>
+      </div>      
+        <div class="row">
+          <div class="col-sm-4">&nbsp;</div>
+          <div class="col-sm-4">
+              <input type="file" name="file" id="file" accept=".csv, .xlsx">
+          </div>
+          <div class="col-sm-4">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">&nbsp;</div>
+            <div class="col-sm-4">
+               <input type="button" class="btn btn-primary" name="upload" id="upload" value="Upload">
+            </div>
+            <div class="col-sm-4">&nbsp;</div>
+        </div>
+    </div>
+  </form>
+</body>
+
+</html>
+<script>
+  $(document).ready(function () { 
+    $('#file').on('click', function() {
+      $('#message').html("");
+    });
+
+    $('#upload').on('click', function() {
+        var file_data = $('#file').prop('files')[0];
+        if(file_data==undefined){
+          $('#message').html("File is require to upload");
+          $('#message').css('color', 'red');
+          return false;
+        }   
+        var form_data = new FormData();                  
+        form_data.append('file', file_data);
+                                     
+        $.ajax({
+            url: '/upload',  
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,                         
+            type: 'post',
+            success: function(data) {
+                if(data.success==true){
+                  $('#message').css('color', 'green');
+                }else{
+                  $('#message').css('color', 'red');
+                }
+                $('#message').html(data.message);
+                $('#file').val("");
+              }
+        });
+    });      
+   });
+   </script>

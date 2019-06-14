@@ -1,0 +1,10 @@
+#/bin/bash
+
+export DB_HOST=localhost
+export DB_NAME=webogo
+export DB_USERNAME=local
+export DB_PASSWORD=local
+export PORT=:9999
+export DB_PARAMS="sslmode=disable"
+export ENV="dev"
+export DB_PORT=5432
