@@ -1,0 +1,4 @@
+development:
+    dialect: mysql
+    datasource: username:password@/dbname?parseTime=true
+    dir: migrations/
